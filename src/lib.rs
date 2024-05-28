@@ -1,3 +1,5 @@
+#![doc = include_str!("../README.md")]
+
 /// StarPU bindings
 #[allow(
     improper_ctypes,
@@ -8,12 +10,12 @@
     rustdoc::invalid_html_tags,
     rustdoc::bare_urls
 )]
-mod starpu {
+mod bindgen {
     use hwlocality_sys::*;
     use libc::*;
     include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 }
-pub use starpu::*;
+pub use bindgen::*;
 
 /// Re-export libc and hwloc definitions
 pub use hwlocality_sys;
