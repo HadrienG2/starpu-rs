@@ -1,0 +1,11 @@
+[package]
+name = "starpu"
+version = "0.1.0"
+edition = "2021"
+links = "starpu"
+
+[dependencies]
+
+[build-dependencies]
+bindgen = "0.69.4"
+pkg-config = "0.3.30"
