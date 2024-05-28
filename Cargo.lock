@@ -98,6 +98,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "hwlocality-sys"
+version = "0.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a9fc9c05ba2679c5f7d518bc2446dc6d892707ffff99534422082591ccbc825d"
+dependencies = [
+ "libc",
+ "pkg-config",
+ "windows-sys",
+]
+
+[[package]]
 name = "itertools"
 version = "0.12.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -263,10 +274,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0fda2ff0d084019ba4d7c6f371c95d8fd75ce3524c3cb8fb653a3023f6323e64"
 
 [[package]]
-name = "starpu"
+name = "starpu-sys"
 version = "0.1.0"
 dependencies = [
  "bindgen",
+ "hwlocality-sys",
+ "libc",
  "pkg-config",
 ]
 

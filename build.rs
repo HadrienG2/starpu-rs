@@ -2,43 +2,26 @@ use bindgen::EnumVariation;
 use std::{env, path::PathBuf, sync::OnceLock};
 
 fn main() {
-    // We don't need hwloc on docs.rs since it only builds the docs
+    // We don't need StarPU on docs.rs since it only builds the docs
+    // FIXME: Actually, we do need it since we use bindgen. Find out how we
+    //        could handle docs.rs correctly.
     if std::env::var("DOCS_RS").is_err() {
-        setup_hwloc();
+        setup_starpu();
     }
 }
 
-const DEFAULT_VERSION: &str = "1.4.0";
-
-/// Configure the hwloc dependency
-fn setup_hwloc() {
+/// Configure the StarPU dependency
+fn setup_starpu() {
     // Select desired StarPU version
-    // FIXME: Stop hardcoding, select the right version based on features as in
-    //        hwlocality.
-    let required_version = DEFAULT_VERSION;
+    // FIXME: Stop hardcoding, select the right version based on features as
+    //        done in hwlocality_sys.
+    let required_version = "1.4.0";
 
     // Find the library using pkg-config
-    let library = find_hwloc(required_version);
+    let library = find_starpu(required_version);
 
-    // Generate the bindings (TODO: Adapt search path if pkg_config isn't
-    // enough).
-    let bindings = bindgen::Builder::default()
-        .clang_args(
-            dbg!(library.include_paths.iter().flat_map(|include_path| [
-                "-isystem".to_string(),
-                include_path.display().to_string()
-            ]))
-            .collect::<Vec<_>>(),
-        )
-        .default_enum_style(EnumVariation::ModuleConsts)
-        .derive_copy(true)
-        .derive_debug(true)
-        .derive_default(true)
-        .derive_partialeq(true)
-        .header("wrapper.h")
-        .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
-        .generate()
-        .expect("Unable to generate bindings");
+    // Generate the Rust bindings
+    let bindings = generate_bindings(&library);
 
     // Write the bindings to the $OUT_DIR/bindings.rs file.
     let out_path = PathBuf::from(env::var("OUT_DIR").unwrap());
@@ -47,8 +30,8 @@ fn setup_hwloc() {
         .expect("Couldn't write bindings!");
 }
 
-/// Use pkg-config to locate and use a certain hwloc release
-fn find_hwloc(required_version: &str) -> pkg_config::Library {
+/// Use pkg-config to locate and use a certain StarPu release
+fn find_starpu(required_version: &str) -> pkg_config::Library {
     // Initialize pkg-config
     let mut config = pkg_config::Config::new();
 
@@ -65,7 +48,8 @@ fn find_hwloc(required_version: &str) -> pkg_config::Library {
 
     // Run pkg-config
     let lib = config
-        // FIXME: Make static builds work outsice macos (target_os() != "macos")
+        // FIXME: Make static builds work outside macos (target_os() !=
+        //        "macos"), as done in hwlocality
         .statik(false)
         .probe(&format!("starpu-{major_version}.{minor_version}"))
         .expect("Could not find a suitable version of StarPU");
@@ -85,6 +69,41 @@ fn find_hwloc(required_version: &str) -> pkg_config::Library {
 
     // Forward pkg-config output for futher consumption
     lib
+}
+
+/// Generate StarPU bindings using bindgen
+fn generate_bindings(library: &pkg_config::Library) -> bindgen::Bindings {
+    bindgen::Builder::default()
+        .allowlist_file(".*/starpu/.*")
+        .allowlist_recursively(false)
+        .allowlist_type(".*va_list.*|drand48_data")
+        .array_pointers_in_arguments(true)
+        .clang_args(
+            library
+                .include_paths
+                .iter()
+                .flat_map(|include_path| {
+                    ["-isystem".to_string(), include_path.display().to_string()]
+                })
+                .chain(std::iter::once(
+                    "-fretain-comments-from-system-headers".to_string(),
+                ))
+                .collect::<Vec<_>>(),
+        )
+        .constified_enum_module("starpu_task_status")
+        .default_enum_style(EnumVariation::Consts)
+        .derive_copy(true)
+        .derive_debug(true)
+        .derive_default(true)
+        .derive_partialeq(true)
+        .generate_cstr(true)
+        .header("wrapper.h")
+        .impl_debug(true)
+        .impl_partialeq(true)
+        .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
+        .prepend_enum_name(false)
+        .generate()
+        .expect("Unable to generate StarPU bindings")
 }
 
 /// Cross-compilation friendly alternative to `cfg!(target_os)`

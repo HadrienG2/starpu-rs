@@ -5,6 +5,8 @@ edition = "2021"
 links = "starpu"
 
 [dependencies]
+hwlocality-sys = "0.4.1"
+libc = "0.2.155"
 
 [build-dependencies]
 bindgen = "0.69.4"
