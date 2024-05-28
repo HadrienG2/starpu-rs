@@ -1,4 +1,4 @@
-# Low-level bindings to StarPU
+# Low-level Rust bindings to StarPU
 
 This Rust crate allows you to use [StarPU](https://starpu.gitlabpages.inria.fr/)
 in Rust almost like a C program would.
