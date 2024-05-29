@@ -52,7 +52,8 @@ The crates within this repository have three basic dependencies:
    [`pkgconf`](http://pkgconf.org/features.html), which is used to locate the
    various parts of the StarPU installation.
 3. `libclang`, which is used in the process of translating the StarPU C headers
-   to equivalent Rust declarations.
+   to equivalent Rust declarations. Note that if you have `clang` itself already
+   installed, you don't need to install `libclang`
 
 In addition, if StarPU is installed in a non-standard location, you will have to
 make sure that your `PKG_CONFIG_PATH` is configured correctly (along the lines
