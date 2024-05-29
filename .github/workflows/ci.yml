@@ -20,7 +20,7 @@ concurrency:
 
 env:
   LLVM_VERSION: 15
-  LIBCLANG_PATH: /usr/lib/llvm-${{ env.LLVM_VERSION }}  # Change this when switching Ubuntu releases
+  LIBCLANG_PATH: /usr/lib/llvm-$LLVM_VERSION  # Change this when switching Ubuntu releases
   MINIMAL_RUST: '1.78.0'  # Minimal Supported Rust Version
   RUSTFLAGS: '-D warnings'
   RUSTDOCFLAGS: '-D warnings'
