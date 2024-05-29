@@ -78,10 +78,9 @@ jobs:
           components: rustfmt,clippy
 
       - name: Install dependencies using APT
-        uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          version: 1.0
-          packages: libstarpu-dev libclang1-${{ env.LLVM_VERSION }}
+        run:
+          sudo apt-get update
+          sudo apt-get install libstarpu-dev libclang1-${{ env.LLVM_VERSION }}
 
       - name: Check format
         run: cargo fmt --all --check
@@ -143,10 +142,9 @@ jobs:
           toolchain: ${{ matrix.rust }}
 
       - name: Install dependencies using APT
-        uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          version: 1.0
-          packages: libstarpu-dev libclang1-${{ env.LLVM_VERSION }}
+        run:
+          sudo apt-get update
+          sudo apt-get install libstarpu-dev libclang1-${{ env.LLVM_VERSION }}
 
       - name: Run tests
         run: cargo test --workspace ${{ env.FEATURES_FLAG }}
@@ -196,10 +194,9 @@ jobs:
           toolchain: ${{ matrix.rust }}
 
       - name: Install dependencies using APT
-        uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          version: 1.0
-          packages: libstarpu-dev libclang1-${{ env.LLVM_VERSION }}
+        run:
+          sudo apt-get update
+          sudo apt-get install libstarpu-dev libclang1-${{ env.LLVM_VERSION }}
 
       - name: Run unit and doc tests
         run: cargo test --workspace --release ${{ env.FEATURES_FLAG }}
@@ -238,10 +235,9 @@ jobs:
           components: rust-src
 
       - name: Install dependencies using APT
-        uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          version: 1.0
-          packages: libstarpu-dev libclang1-${{ env.LLVM_VERSION }}
+        run:
+          sudo apt-get update
+          sudo apt-get install libstarpu-dev libclang1-${{ env.LLVM_VERSION }}
 
       - name: Install cargo-careful
         uses: baptiste0928/cargo-install@v3
@@ -273,10 +269,9 @@ jobs:
           toolchain: stable
 
       - name: Install dependencies using APT
-        uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          version: 1.0
-          packages: libstarpu-dev libclang1-${{ env.LLVM_VERSION }}
+        run:
+          sudo apt-get update
+          sudo apt-get install libstarpu-dev libclang1-${{ env.LLVM_VERSION }}
 
       - name: Install cargo-tarpaulin
         uses: baptiste0928/cargo-install@v3
@@ -331,10 +326,9 @@ jobs:
           toolchain: ${{ matrix.rust }}
 
       - name: Install dependencies using APT
-        uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          version: 1.0
-          packages: libstarpu-dev libclang1-${{ env.LLVM_VERSION }}
+        run:
+          sudo apt-get update
+          sudo apt-get install libstarpu-dev libclang1-${{ env.LLVM_VERSION }}
 
       - name: Install cargo-examples
         uses: baptiste0928/cargo-install@v3
