@@ -2,16 +2,6 @@ use bindgen::EnumVariation;
 use std::{env, path::PathBuf, sync::OnceLock};
 
 fn main() {
-    // We don't need StarPU on docs.rs since it only builds the docs
-    // FIXME: Actually, we do need it since we use bindgen. Find out how we
-    //        could handle docs.rs correctly.
-    if std::env::var("DOCS_RS").is_err() {
-        setup_starpu();
-    }
-}
-
-/// Configure the StarPU dependency
-fn setup_starpu() {
     // Find the library using pkg-config
     let library = find_starpu();
 
