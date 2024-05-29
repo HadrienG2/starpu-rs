@@ -20,7 +20,7 @@ concurrency:
 
 env:
   LLVM_VERSION: 15  # Change this when switching Ubuntu releases
-  LIBCLANG_PATH: /usr/lib/llvm-15  # Change this when switching Ubuntu releases
+  LIBCLANG_PATH: /usr/lib/llvm-15/lib  # Change this when switching Ubuntu releases
   MINIMAL_RUST: '1.78.0'  # Minimal Supported Rust Version
   RUSTFLAGS: '-D warnings'
   RUSTDOCFLAGS: '-D warnings'
@@ -84,19 +84,6 @@ jobs:
 
       - name: Check format
         run: cargo fmt --all --check
-
-
-
-
-      - name: DEBUG where the fuck is my starpu
-        run: |
-          sudo apt update && sudo apt search starpu
-          sudo apt install -y libstarpu-dev
-          ls ${LIBCLANG_PATH}
-
-
-
-
 
       - name: Check clippy lints
         run: cargo clippy ${{ env.JOB_FLAGS }} --all-targets -- -D warnings
