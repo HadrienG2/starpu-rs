@@ -4,7 +4,12 @@ version = "0.1.0"
 edition = "2021"
 links = "starpu"
 
+[features]
+# Enable this if your local StarPU was built with OpenCL support
+opencl = ["cl-sys"]
+
 [dependencies]
+cl-sys = { version = "0.4.3", optional = true }
 hwlocality-sys = "0.4.1"
 libc = "0.2.155"
 

@@ -11,12 +11,22 @@
     rustdoc::bare_urls
 )]
 mod bindgen {
+    #[cfg(feature = "opencl")]
+    use cl_sys::*;
     use hwlocality_sys::*;
     use libc::*;
     include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 }
 pub use bindgen::*;
 
-/// Re-export libc and hwloc definitions
+// Re-export types from other libraries used in the StarPU library
+
+/// OpenCL types. Only available if the "opencl" feature is enabled.
+#[cfg(feature = "opencl")]
+pub use cl_sys;
+
+/// hwloc types
 pub use hwlocality_sys;
+
+/// libc types
 pub use libc;
