@@ -87,6 +87,15 @@ jobs:
       - name: Check format
         run: cargo fmt --all --check
 
+
+
+
+      - name: DEBUG where the fuck is my starpu
+        run: ls ${PKG_CONFIG_PATH}
+
+
+
+
       - name: Check clippy lints
         run: cargo clippy ${{ env.JOB_FLAGS }} --all-targets -- -D warnings
 
