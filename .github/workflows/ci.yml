@@ -91,7 +91,7 @@ jobs:
 
 
       - name: DEBUG where the fuck is my starpu
-        run: ls ${PKG_CONFIG_PATH}
+        run: find / -name "libstarpu.pc"
 
 
 
