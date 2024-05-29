@@ -2,6 +2,8 @@
 
 /// StarPU bindings
 #[allow(
+    clippy::too_many_arguments,
+    clippy::useless_transmute,
     improper_ctypes,
     non_camel_case_types,
     non_snake_case,
