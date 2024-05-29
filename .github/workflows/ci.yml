@@ -91,7 +91,9 @@ jobs:
 
 
       - name: DEBUG where the fuck is my starpu
-        run: find / -name "libstarpu.pc"
+        run: |
+          apt update && apt search starpu
+          find /usr -name "libstarpu.pc"
 
 
 
