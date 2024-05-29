@@ -23,6 +23,7 @@ env:
   LLVM_VERSION: 15
   CLANG_PATH: /usr/bin/clang-15
   LIBCLANG_PATH: /usr/lib/llvm-15/lib
+  UDEV_VERSION: 1
   #
   MINIMAL_RUST: '1.78.0'  # Minimal Supported Rust Version
   RUSTFLAGS: '-D warnings'
@@ -83,7 +84,7 @@ jobs:
       - name: Install dependencies using APT
         run: |
           sudo apt-get update
-          sudo apt-get install clang-${{ env.LLVM_VERSION }} libstarpu-dev libudev
+          sudo apt-get install clang-${{ env.LLVM_VERSION }} libstarpu-dev libudev${{ env.UDEV_VERSION }}
 
       - name: Check format
         run: cargo fmt --all --check
@@ -134,7 +135,7 @@ jobs:
       - name: Install dependencies using APT
         run: |
           sudo apt-get update
-          sudo apt-get install clang-${{ env.LLVM_VERSION }} libstarpu-dev libudev
+          sudo apt-get install clang-${{ env.LLVM_VERSION }} libstarpu-dev libudev${{ env.UDEV_VERSION }}
 
       - name: Run tests
         run: cargo test --workspace ${{ env.FEATURES_FLAG }}
@@ -186,7 +187,7 @@ jobs:
       - name: Install dependencies using APT
         run: |
           sudo apt-get update
-          sudo apt-get install clang-${{ env.LLVM_VERSION }} libstarpu-dev libudev
+          sudo apt-get install clang-${{ env.LLVM_VERSION }} libstarpu-dev libudev${{ env.UDEV_VERSION }}
 
       - name: Run unit and doc tests
         run: cargo test --workspace --release ${{ env.FEATURES_FLAG }}
@@ -227,7 +228,7 @@ jobs:
       - name: Install dependencies using APT
         run: |
           sudo apt-get update
-          sudo apt-get install clang-${{ env.LLVM_VERSION }} libstarpu-dev libudev
+          sudo apt-get install clang-${{ env.LLVM_VERSION }} libstarpu-dev libudev${{ env.UDEV_VERSION }}
 
       - name: Install cargo-careful
         uses: baptiste0928/cargo-install@v3
@@ -261,7 +262,7 @@ jobs:
       - name: Install dependencies using APT
         run: |
           sudo apt-get update
-          sudo apt-get install clang-${{ env.LLVM_VERSION }} libstarpu-dev libudev
+          sudo apt-get install clang-${{ env.LLVM_VERSION }} libstarpu-dev libudev${{ env.UDEV_VERSION }}
 
       - name: Install cargo-tarpaulin
         uses: baptiste0928/cargo-install@v3
@@ -318,7 +319,7 @@ jobs:
       - name: Install dependencies using APT
         run: |
           sudo apt-get update
-          sudo apt-get install clang-${{ env.LLVM_VERSION }} libstarpu-dev libudev
+          sudo apt-get install clang-${{ env.LLVM_VERSION }} libstarpu-dev libudev${{ env.UDEV_VERSION }}
 
       - name: Install cargo-examples
         uses: baptiste0928/cargo-install@v3
