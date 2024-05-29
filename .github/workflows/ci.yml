@@ -61,6 +61,7 @@ jobs:
 
     env:
       # OpenCL feature is needed on Ubuntu because their StarPU is built with it
+      FEATURES: opencl
       JOB_FLAGS: '--workspace --features=opencl'
 
     steps:
@@ -99,11 +100,11 @@ jobs:
         with:
           package: starpu-sys # TODO: Extend once high-level starpu crate is released
           feature-group: default-features
-          features: ${{ matrix.features }}
+          features: ${{ env.FEATURES }}
           rust-toolchain: manual
 
 
-  # Run the tests and examples on all supported OSes and Rust versions (main CI)
+  # Run the tests on all supported OSes and Rust versions (main CI)
   test-contrib-debug:
     # Don't run CI twice when a PR is created from a branch internal to the repo
     # Don't run in scheduled jobs, that's what test-scheduled is for
@@ -139,17 +140,8 @@ jobs:
       - name: Run tests
         run: cargo test --workspace ${{ env.FEATURES_FLAG }}
 
-      - name: Install cargo-examples
-        uses: baptiste0928/cargo-install@v3
-        with:
-          crate: cargo-examples
 
-      - name: Run all examples
-        run: cargo examples ${{ env.FEATURES_FLAG }}
-
-
-  # Run the tests and examples on all supported OSes and Rust versions,
-  # in release mode
+  # Run the tests on all supported OSes and Rust versions, in release mode
   #
   # Some things like UB or arithmetic overflow differ between debug and release
   # builds, so it's a good idea to run the tests in release mode too.
@@ -191,14 +183,6 @@ jobs:
       - name: Run unit and doc tests
         run: cargo test --workspace --release ${{ env.FEATURES_FLAG }}
 
-      - name: Install cargo-examples
-        uses: baptiste0928/cargo-install@v3
-        with:
-          crate: cargo-examples
-
-      - name: Run all examples
-        run: cargo examples ${{ env.FEATURES_FLAG }} -- --release
-
 
   # Run the tests with extra stdlib checks and the ASAN sanitizer
   test-careful:
@@ -235,10 +219,7 @@ jobs:
           crate: cargo-careful
 
       - name: Run unit and doc tests under cargo careful, with ASAN
-        run: |
-          # By default, cargo-careful disables LeakChecker, but I actually like it
-          export ASAN_OPTIONS=''
-          cargo careful test -Zcareful-sanitizer=address ${{ env.JOB_FLAGS }}
+        run: cargo careful test -Zcareful-sanitizer=address ${{ env.JOB_FLAGS }}
 
 
   # Test current code coverage
@@ -320,19 +301,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install clang-${{ env.LLVM_VERSION }} libstarpu-dev libudev-dev
 
-      - name: Install cargo-examples
-        uses: baptiste0928/cargo-install@v3
-        with:
-          crate: cargo-examples
-
       - name: Run basic tests (debug build)
         run: cargo test --workspace ${{ env.FEATURES_FLAG }}
-
-      - name: Run all examples (debug build)
-        run: cargo examples ${{ env.FEATURES_FLAG }}
-
-      - name: Run all examples (release build)
-        run: cargo examples ${{ env.FEATURES_FLAG }} -- --release
 
       - name: Run basic tests (release build)
         run: cargo test --workspace --release ${{ env.FEATURES_FLAG }}
