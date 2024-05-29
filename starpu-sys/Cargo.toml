@@ -9,6 +9,7 @@ keywords.workspace = true
 name = "starpu-sys"
 repository.workspace = true
 rust-version.workspace = true
+# See release checklist in top-level Cargo.toml
 version = "1.0.0"
 
 [features]

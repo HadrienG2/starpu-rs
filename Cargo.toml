@@ -1,3 +1,13 @@
+# Release checklist
+#
+# - Cross-check all public API documentation, update as needed
+# - Update changelog
+# - Update version number in Cargo.toml
+# - Push master, make sure it passes CI
+# - Cargo publish
+# - Roll an annotated git tag
+# - Add a github release
+
 [workspace]
 members = ["starpu-sys"]
 resolver = "2"
