@@ -15,7 +15,7 @@ fn main() {
         .expect("Couldn't write bindings!");
 }
 
-/// Use pkg-config to locate and use a certain StarPu release
+/// Use pkg-config to locate and use a certain StarPU release
 fn find_starpu() -> pkg_config::Library {
     let lib = pkg_config::Config::new()
         .probe("libstarpu")

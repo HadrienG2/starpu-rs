@@ -19,9 +19,9 @@ mod bindgen {
 }
 pub use bindgen::*;
 
-// Re-export types from other libraries used in the StarPU library
+// Re-export types from other libraries used in the StarPU bindings
 
-/// OpenCL types. Only available if the "opencl" feature is enabled.
+/// OpenCL types (only available if the "opencl" feature is enabled)
 #[cfg(feature = "opencl")]
 pub use cl_sys;
 
