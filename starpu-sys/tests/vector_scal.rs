@@ -1,7 +1,7 @@
 //! Port of the first vector scaling example from the StarPU 2024 tutorial
 
 use starpu_sys::*;
-use std::{ffi::c_void, ptr, mem};
+use std::{ffi::c_void, mem, ptr};
 
 #[test]
 fn vector_scal() {
@@ -47,7 +47,7 @@ fn vector_scal() {
         //
         // From now on, the application is not supposed to access vector
         // directly, since its content may be copied and modified by a task
-        // on a GPU, the main-memory copy then being outdated. 
+        // on a GPU, the main-memory copy then being outdated.
         let mut vector_handle = ptr::null_mut();
         starpu_vector_data_register(
             &mut vector_handle,
