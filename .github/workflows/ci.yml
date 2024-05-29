@@ -78,7 +78,7 @@ jobs:
           components: rustfmt,clippy
 
       - name: Install dependencies using APT
-        run:
+        run: |
           sudo apt-get update
           sudo apt-get install libstarpu-dev libclang1-${{ env.LLVM_VERSION }}
 
@@ -142,7 +142,7 @@ jobs:
           toolchain: ${{ matrix.rust }}
 
       - name: Install dependencies using APT
-        run:
+        run: |
           sudo apt-get update
           sudo apt-get install libstarpu-dev libclang1-${{ env.LLVM_VERSION }}
 
@@ -194,7 +194,7 @@ jobs:
           toolchain: ${{ matrix.rust }}
 
       - name: Install dependencies using APT
-        run:
+        run: |
           sudo apt-get update
           sudo apt-get install libstarpu-dev libclang1-${{ env.LLVM_VERSION }}
 
@@ -235,7 +235,7 @@ jobs:
           components: rust-src
 
       - name: Install dependencies using APT
-        run:
+        run: |
           sudo apt-get update
           sudo apt-get install libstarpu-dev libclang1-${{ env.LLVM_VERSION }}
 
@@ -269,7 +269,7 @@ jobs:
           toolchain: stable
 
       - name: Install dependencies using APT
-        run:
+        run: |
           sudo apt-get update
           sudo apt-get install libstarpu-dev libclang1-${{ env.LLVM_VERSION }}
 
@@ -326,7 +326,7 @@ jobs:
           toolchain: ${{ matrix.rust }}
 
       - name: Install dependencies using APT
-        run:
+        run: |
           sudo apt-get update
           sudo apt-get install libstarpu-dev libclang1-${{ env.LLVM_VERSION }}
 
