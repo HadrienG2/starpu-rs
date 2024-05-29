@@ -93,6 +93,7 @@ jobs:
       - name: DEBUG where the fuck is my starpu
         run: |
           sudo apt update && sudo apt search starpu
+          sudo apt install libstarpu-dev
           sudo find /usr -name "libstarpu.pc"
 
 
