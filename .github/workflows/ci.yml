@@ -30,7 +30,7 @@ jobs:
     # Don't run CI twice when a PR is created from a branch internal to the repo
     if: github.event_name == 'push' || github.event_name == 'schedule' || github.event.pull_request.head.repo.full_name != github.repository
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     outputs:
       MINIMAL_RUST: ${{ env.MINIMAL_RUST }}
@@ -52,7 +52,7 @@ jobs:
     # Don't run CI twice when a PR is created from a branch internal to the repo
     if: github.event_name == 'push' || github.event_name == 'schedule' || github.event.pull_request.head.repo.full_name != github.repository
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     env:
       # OpenCL feature is needed on Ubuntu because their StarPU is built with it
@@ -79,7 +79,7 @@ jobs:
         uses: awalsh128/cache-apt-pkgs-action@latest
         with:
           version: 1.0
-          packages: libstarpu-dev libclang1
+          packages: libstarpu-dev
 
       - name: Check format
         run: cargo fmt --all --check
@@ -105,7 +105,7 @@ jobs:
     # Don't run in scheduled jobs, that's what test-scheduled is for
     if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     needs: matrix_vars
 
@@ -131,7 +131,7 @@ jobs:
         uses: awalsh128/cache-apt-pkgs-action@latest
         with:
           version: 1.0
-          packages: libstarpu-dev libclang1
+          packages: libstarpu-dev
 
       - name: Run tests
         run: cargo test --workspace ${{ env.FEATURES_FLAG }}
@@ -158,7 +158,7 @@ jobs:
     # Don't run in scheduled jobs, that's what test-scheduled is for
     if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     needs: matrix_vars
 
@@ -184,7 +184,7 @@ jobs:
         uses: awalsh128/cache-apt-pkgs-action@latest
         with:
           version: 1.0
-          packages: libstarpu-dev libclang1
+          packages: libstarpu-dev
 
       - name: Run unit and doc tests
         run: cargo test --workspace --release ${{ env.FEATURES_FLAG }}
@@ -203,7 +203,7 @@ jobs:
     # Don't run CI twice when a PR is created from a branch internal to the repo
     if: github.event_name == 'push' || github.event_name == 'schedule' || github.event.pull_request.head.repo.full_name != github.repository
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     env:
       JOB_FLAGS: '--workspace --features=opencl'
@@ -226,7 +226,7 @@ jobs:
         uses: awalsh128/cache-apt-pkgs-action@latest
         with:
           version: 1.0
-          packages: libstarpu-dev libclang1
+          packages: libstarpu-dev
 
       - name: Install cargo-careful
         uses: baptiste0928/cargo-install@v3
@@ -246,7 +246,7 @@ jobs:
     # Don't run in scheduled jobs, coverage doesn't change on its own
     if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout sources
@@ -261,7 +261,7 @@ jobs:
         uses: awalsh128/cache-apt-pkgs-action@latest
         with:
           version: 1.0
-          packages: libstarpu-dev libclang1
+          packages: libstarpu-dev
 
       - name: Install cargo-tarpaulin
         uses: baptiste0928/cargo-install@v3
@@ -292,7 +292,7 @@ jobs:
   test-scheduled:
     if: github.event_name == 'schedule'
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     needs: matrix_vars
 
@@ -319,7 +319,7 @@ jobs:
         uses: awalsh128/cache-apt-pkgs-action@latest
         with:
           version: 1.0
-          packages: libstarpu-dev libclang1
+          packages: libstarpu-dev
 
       - name: Install cargo-examples
         uses: baptiste0928/cargo-install@v3
