@@ -1,0 +1,13 @@
+[release_like_test]
+fail-immediately = true
+features = "opencl"
+implicit-test-threads = true
+skip-clean = true
+workspace = true
+
+[normal_test]
+fail-immediately = true
+features = "opencl"
+implicit-test-threads = true
+skip-clean = true
+workspace = true
