@@ -1,0 +1,28 @@
+[package]
+authors.workspace = true
+categories.workspace = true
+description = "Low-level bindings to the StarPU runtime"
+edition.workspace = true
+license.workspace = true
+links = "starpu"
+keywords.workspace = true
+name = "starpu-sys"
+repository.workspace = true
+rust-version.workspace = true
+version = "1.0.0"
+
+[features]
+# Enable this if StarPU was built with OpenCL support
+opencl = ["dep:cl-sys"]
+
+[dependencies]
+cl-sys = { workspace = true, optional = true }
+hwlocality-sys.workspace = true
+libc.workspace = true
+
+[build-dependencies]
+bindgen.workspace = true
+pkg-config.workspace = true
+
+[package.metadata.docs.rs]
+features = ["opencl"]

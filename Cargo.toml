@@ -1,21 +1,19 @@
-[package]
-name = "starpu-sys"
-version = "0.1.0"
+[workspace]
+members = ["starpu-sys"]
+resolver = "2"
+
+[workspace.package]
+authors = ["Hadrien G."]
+categories = ["asynchronous", "concurrency", "external-ffi-bindings", "hardware-support", "memory-management"]
 edition = "2021"
-links = "starpu"
+keywords = ["distributed", "heterogenerous", "runtime", "parallel", "scheduling"]
+license = "MPL-2.0"
+repository = "https://github.com/HadrienG2/starpu-rs"
+rust-version = "1.78"
 
-[features]
-# Enable this if StarPU was built with OpenCL support
-opencl = ["cl-sys"]
-
-[dependencies]
-cl-sys = { version = "0.4.3", optional = true }
+[workspace.dependencies]
+bindgen = "0.69.4"
+cl-sys = "0.4.3"
 hwlocality-sys = "0.4.1"
 libc = "0.2.155"
-
-[build-dependencies]
-bindgen = "0.69.4"
 pkg-config = "0.3.30"
-
-[package.metadata.docs.rs]
-features = ["opencl"]
