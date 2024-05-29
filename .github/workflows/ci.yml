@@ -22,7 +22,6 @@ env:
   LLVM_VERSION: 15  # Change this when switching Ubuntu releases
   LIBCLANG_PATH: /usr/lib/llvm-15  # Change this when switching Ubuntu releases
   MINIMAL_RUST: '1.78.0'  # Minimal Supported Rust Version
-  PKG_CONFIG_PATH: /usr/lib/x86_64-linux-gnu/pkgconfig/
   RUSTFLAGS: '-D warnings'
   RUSTDOCFLAGS: '-D warnings'
   RUST_LOG: 'warn'
@@ -94,7 +93,8 @@ jobs:
         run: |
           sudo apt update && sudo apt search starpu
           sudo apt install -y libstarpu-dev
-          sudo find /usr -name "libstarpu.pc"
+          ls ${LIBCLANG_PATH}
+
 
 
 
