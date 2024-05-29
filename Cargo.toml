@@ -5,7 +5,7 @@ edition = "2021"
 links = "starpu"
 
 [features]
-# Enable this if your local StarPU was built with OpenCL support
+# Enable this if StarPU was built with OpenCL support
 opencl = ["cl-sys"]
 
 [dependencies]
@@ -16,3 +16,6 @@ libc = "0.2.155"
 [build-dependencies]
 bindgen = "0.69.4"
 pkg-config = "0.3.30"
+
+[package.metadata.docs.rs]
+features = ["opencl"]
