@@ -55,7 +55,12 @@ The crates within this repository have three basic dependencies:
    to equivalent Rust declarations. If you already have `clang` installed, you
    don't need to install `libclang` as well.
    * If you have multiple releases of clang installed, you may need to set the
-     `EN
+     `CLANG_PATH` and `LIBCLANG_PATH` environment variables in order to avoid
+     problems stemming from the fact that some parts of the build process pick
+     up a certain version of clang, and other parts of the build process pick up
+     another version of libclang. This will typically manifest as [libclang
+     emitting bizarre complaints about compiler-internal
+     headers](https://gitlab.freedesktop.org/mesa/mesa/-/issues/7268#note_1556740).
 
 In addition, if StarPU is installed in a non-standard location, you will have to
 make sure that your `PKG_CONFIG_PATH` is configured correctly (along the lines
