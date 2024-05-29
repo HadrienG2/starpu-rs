@@ -1,7 +1,7 @@
 # Rust Bindings for the StarPU runtime
 
 [![MPL licensed](https://img.shields.io/badge/license-MPL-blue.svg)](./LICENSE)<!--[![Package on crates.io](https://img.shields.io/crates/v/starpu.svg)](https://crates.io/crates/starpu) [![Documentation](https://docs.rs/starpu/badge.svg)](https://docs.rs/starpu/)-->
-[![Continuous Integration](https://img.shields.io/github/actions/workflow/status/HadrienG2/starpu-rs/ci.yml?branch=master)](https://github.com/HadrienG2/starpu-rs/actions?query=workflow%3A%22Continuous+Integration%22)<!--[![Code coverage](https://codecov.io/gh/HadrienG2/starpu-rs/graph/badge.svg?token=OYWLNUD9AI)](https://codecov.io/gh/HadrienG2/starpu-rs)[![CII Best Practices Summary](https://img.shields.io/cii/summary/7876)](https://www.bestpractices.dev/en/projects/7876)-->
+[![Continuous Integration](https://img.shields.io/github/actions/workflow/status/HadrienG2/starpu-rs/ci.yml?branch=main)](https://github.com/HadrienG2/starpu-rs/actions?query=workflow%3A%22Continuous+Integration%22)<!--[![Code coverage](https://codecov.io/gh/HadrienG2/starpu-rs/graph/badge.svg?token=OYWLNUD9AI)](https://codecov.io/gh/HadrienG2/starpu-rs)[![CII Best Practices Summary](https://img.shields.io/cii/summary/7876)](https://www.bestpractices.dev/en/projects/7876)-->
 ![Requires rustc
 1.78.0+](https://img.shields.io/badge/rustc-1.78.0+-lightgray.svg)
 
@@ -52,8 +52,10 @@ The crates within this repository have three basic dependencies:
    [`pkgconf`](http://pkgconf.org/features.html), which is used to locate the
    various parts of the StarPU installation.
 3. `libclang`, which is used in the process of translating the StarPU C headers
-   to equivalent Rust declarations. Note that if you have `clang` itself already
-   installed, you don't need to install `libclang`
+   to equivalent Rust declarations. If you already have `clang` installed, you
+   don't need to install `libclang` as well.
+   * If you have multiple releases of clang installed, you may need to set the
+     `EN
 
 In addition, if StarPU is installed in a non-standard location, you will have to
 make sure that your `PKG_CONFIG_PATH` is configured correctly (along the lines
@@ -94,5 +96,5 @@ be documented here.
 ## License
 
 This project uses the MPLv2 license, please see the
-[LICENSE](https://github.com/hadrieng2/starpu-rs/blob/master/LICENSE) file for
+[LICENSE](https://github.com/hadrieng2/starpu-rs/blob/main/LICENSE) file for
 more information.
