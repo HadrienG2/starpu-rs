@@ -1,7 +1,7 @@
 //! Port of the first vector scaling example from the StarPU 2024 tutorial
 
 use starpu_sys::*;
-use std::{ffi::c_void, mem, ptr};
+use std::{f32::consts::PI, ffi::c_void, mem, ptr};
 
 #[test]
 fn vector_scal() {
@@ -58,7 +58,7 @@ fn vector_scal() {
         );
 
         // Define factor
-        let factor = 3.14f32;
+        let factor = PI;
 
         // Submit an asynchronous task to StarPU
         #[rustfmt::skip]
