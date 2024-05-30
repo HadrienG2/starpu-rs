@@ -24,6 +24,6 @@ rust-version = "1.78"
 [workspace.dependencies]
 bindgen = "0.69.4"
 cl-sys = "0.4.3"
-hwlocality-sys = "0.4.1"
+hwlocality-sys = "0.4.2"
 libc = "0.2.155"
 pkg-config = "0.3.30"
