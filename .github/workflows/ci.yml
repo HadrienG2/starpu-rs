@@ -95,7 +95,41 @@ jobs:
       - name: Build docs
         run: cargo doc ${{ env.JOB_FLAGS }}
 
-      - name: Check semver compliance
+      - name: Check semver compliance (push/PR version)
+        # Not guaranteed to run on nightly, so we use the separate job below
+        if: github.event_name != 'schedule'
+        uses: obi1kenobi/cargo-semver-checks-action@v2
+        with:
+          package: starpu-sys # TODO: Extend once high-level starpu crate is released
+          feature-group: default-features
+          features: ${{ env.FEATURES }}
+          rust-toolchain: manual
+
+  # Workaround for cargo-semver-checks not guaranteeing nightly support
+  scheduled-semver-checks:
+    if: github.event_name == 'schedule'
+
+    runs-on: ubuntu-latest
+
+    env:
+      FEATURES: opencl
+      JOB_FLAGS: '--workspace --features=opencl'
+
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+
+      - name: Set up stable toolchain
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          components: rustfmt,clippy
+
+      - name: Install dependencies using APT
+        run: |
+          sudo apt-get update
+          sudo apt-get install clang-${{ env.LLVM_VERSION }} libstarpu-dev libudev-dev
+
+      - name: Check semver compliance (scheduled version)
         uses: obi1kenobi/cargo-semver-checks-action@v2
         with:
           package: starpu-sys # TODO: Extend once high-level starpu crate is released
