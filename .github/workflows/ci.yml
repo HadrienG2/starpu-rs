@@ -24,6 +24,7 @@ env:
   CLANG_PATH: /usr/bin/clang-15
   LIBCLANG_PATH: /usr/lib/llvm-15/lib
   #
+  CARGO_INCREMENTAL: 0
   MINIMAL_RUST: '1.78.0'  # Minimal Supported Rust Version
   RUSTFLAGS: '-D warnings'
   RUSTDOCFLAGS: '-D warnings'
@@ -94,6 +95,14 @@ jobs:
 
       - name: Build docs
         run: cargo doc ${{ env.JOB_FLAGS }}
+
+      - name: Set up cargo-binstall
+        run: curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
+
+      - name: Look for unused dependencies with cargo-machete
+        run: |
+          cargo binstall -y cargo-machete
+          cargo machete
 
       - name: Check semver compliance (push/PR version)
         # Not guaranteed to run on nightly, so we use the separate job below
