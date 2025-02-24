@@ -20,9 +20,9 @@ concurrency:
 
 env:
   # TODO: Change these when switching Ubuntu releases
-  LLVM_VERSION: 15
-  CLANG_PATH: /usr/bin/clang-15
-  LIBCLANG_PATH: /usr/lib/llvm-15/lib
+  LLVM_VERSION: 19
+  CLANG_PATH: /usr/bin/clang-19
+  LIBCLANG_PATH: /usr/lib/llvm-19/lib
   #
   CARGO_INCREMENTAL: 0
   MINIMAL_RUST: '1.78.0'  # Minimal Supported Rust Version
@@ -36,7 +36,7 @@ jobs:
     # Don't run CI twice when a PR is created from a branch internal to the repo
     if: github.event_name == 'push' || github.event_name == 'schedule' || github.event.pull_request.head.repo.full_name != github.repository
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     outputs:
       MINIMAL_RUST: ${{ env.MINIMAL_RUST }}
@@ -58,7 +58,7 @@ jobs:
     # Don't run CI twice when a PR is created from a branch internal to the repo
     if: github.event_name == 'push' || github.event_name == 'schedule' || github.event.pull_request.head.repo.full_name != github.repository
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     env:
       # OpenCL feature is needed on Ubuntu because their StarPU is built with it
@@ -154,7 +154,7 @@ jobs:
     # Don't run in scheduled jobs, that's what test-scheduled is for
     if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     needs: matrix_vars
 
@@ -197,7 +197,7 @@ jobs:
     # Don't run in scheduled jobs, that's what test-scheduled is for
     if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     needs: matrix_vars
 
@@ -233,7 +233,7 @@ jobs:
     # Don't run CI twice when a PR is created from a branch internal to the repo
     if: github.event_name == 'push' || github.event_name == 'schedule' || github.event.pull_request.head.repo.full_name != github.repository
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     env:
       JOB_FLAGS: '--workspace --features=opencl'
@@ -272,7 +272,7 @@ jobs:
     # Don't run in scheduled jobs, coverage doesn't change on its own
     if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout sources
@@ -317,7 +317,7 @@ jobs:
   test-scheduled:
     if: github.event_name == 'schedule'
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     needs: matrix_vars
 
