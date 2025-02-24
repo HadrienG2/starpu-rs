@@ -25,7 +25,7 @@ env:
   LIBCLANG_PATH: /usr/lib/llvm-19/lib
   #
   CARGO_INCREMENTAL: 0
-  MINIMAL_RUST: '1.78.0'  # Minimal Supported Rust Version
+  MINIMAL_RUST: '1.82.0'  # Minimal Supported Rust Version
   RUSTFLAGS: '-D warnings'
   RUSTDOCFLAGS: '-D warnings'
   RUST_LOG: 'warn'

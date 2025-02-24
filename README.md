@@ -3,7 +3,7 @@
 [![MPL licensed](https://img.shields.io/badge/license-MPL-blue.svg)](./LICENSE)<!--[![Package on crates.io](https://img.shields.io/crates/v/starpu.svg)](https://crates.io/crates/starpu) [![Documentation](https://docs.rs/starpu/badge.svg)](https://docs.rs/starpu/)-->
 [![Continuous Integration](https://img.shields.io/github/actions/workflow/status/HadrienG2/starpu-rs/ci.yml?branch=main)](https://github.com/HadrienG2/starpu-rs/actions?query=workflow%3A%22Continuous+Integration%22)<!--[![Code coverage](https://codecov.io/gh/HadrienG2/starpu-rs/graph/badge.svg?token=OYWLNUD9AI)](https://codecov.io/gh/HadrienG2/starpu-rs)[![CII Best Practices Summary](https://img.shields.io/cii/summary/7876)](https://www.bestpractices.dev/en/projects/7876)-->
 ![Requires rustc
-1.78.0+](https://img.shields.io/badge/rustc-1.78.0+-lightgray.svg)
+1.82.0+](https://img.shields.io/badge/rustc-1.82.0+-lightgray.svg)
 
 ## What is this?
 
