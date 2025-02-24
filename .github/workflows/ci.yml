@@ -267,7 +267,8 @@ jobs:
 
 
 #  # Test current code coverage
-#  # FIXME: Disabled for now due to errors I'm not ready to debug yet
+#  # FIXME: Disabled for now due to errors I'm not ready to debug yet. Once I've
+#  #        done that, add test-coverage back to list of required CI checks.
 #  test-coverage:
 #    # Don't run CI twice when a PR is created from a branch internal to the repo
 #    # Don't run in scheduled jobs, coverage doesn't change on its own
