@@ -8,7 +8,7 @@ Integration](https://img.shields.io/github/actions/workflow/status/HadrienG2/sta
 Best Practices
 Summary](https://img.shields.io/cii/summary/7876)](https://www.bestpractices.dev/en/projects/7876)-->
 ![Requires rustc
-1.78.0+](https://img.shields.io/badge/rustc-1.78.0+-lightgray.svg)
+1.82.0+](https://img.shields.io/badge/rustc-1.82.0+-lightgray.svg)
 
 This crate contains unsafe Rust bindings to the C API of
 [StarPU](https://starpu.gitlabpages.inria.fr/index.html).
