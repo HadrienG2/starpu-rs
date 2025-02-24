@@ -99,11 +99,11 @@ jobs:
       - name: Set up cargo-binstall
         run: curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
 
+      - name: Install cargo-machete
+        uses: taiki-e/install-action@cargo-machete
+
       - name: Look for unused dependencies with cargo-machete
-        run: |
-          # FIXME: --force used as a workaround for https://github.com/Swatinem/rust-cache/issues/204
-          cargo binstall -y --force cargo-machete
-          cargo machete
+        run: cargo machete
 
       - name: Check semver compliance (push/PR version)
         # Not guaranteed to run on nightly, so we use the separate job below
