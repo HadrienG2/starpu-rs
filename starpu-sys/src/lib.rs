@@ -3,6 +3,7 @@
 /// StarPU bindings
 #[allow(
     clippy::missing_safety_doc,
+    clippy::ptr_offset_with_cast,
     clippy::too_many_arguments,
     clippy::useless_transmute,
     improper_ctypes,
