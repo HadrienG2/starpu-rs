@@ -10,7 +10,7 @@ name = "starpu-sys"
 repository.workspace = true
 rust-version.workspace = true
 # See release checklist in top-level Cargo.toml
-version = "2.0.0"
+version = "2.0.1"
 
 [features]
 # Enable this if StarPU was built with OpenCL support
