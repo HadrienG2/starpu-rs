@@ -22,7 +22,7 @@ repository = "https://github.com/HadrienG2/starpu-rs"
 rust-version = "1.82"
 
 [workspace.dependencies]
-bindgen = "0.72.0"
+bindgen = "0.72.1"
 cl-sys = "0.4.3"
 hwlocality-sys = "0.6.0"
 libc = "0.2.174"
